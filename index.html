@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark-dimmed.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+  <script>hljs.highlightAll()</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      color: #222;
+      background: #fff;
+      font: 100% system-ui;
+    }
+
+    a {
+      color: #0033cc;
+    }
+
+    ul {
+      list-style-type: circle
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        color: #eee;
+        background: #121212;
+      }
+
+      body a {
+        color: #809fff;
+      }
+    }
+  </style>
+  <title>IWIKB</title>
+</head>
+
+<body>
+  <header></header>
+  <div class="container">
+    <h1 style="text-align: center;">IWIKB</h1>
+    <h2>Referencia</h2>
+
+    <p>Las IDs (snowflakes) son incrementales e incluyen la fecha de creación de la entidad a la que pertenece</p>
+    <p>Las IDs más antiguas tienen 17 cifras y las más recientes tienen 19 cifras (las ids de 20 cifras ocurrirán a
+      partir del 2090-07-20 17:49:51.015)</p>
+    <p>Un canal de DM tiene un id distinto al destinatario</p>
+    <p>Clyde tiene el ID 1</p>
+    <p>Limites:</p>
+    <ul>
+      <li>500 canales por servidor</li>
+      <li>50 canales en una categoria de un servidor</li>
+      <li>250 roles por servidor</li>
+      <li>500k miembros por servidor (se puede incrementar con ticket a soporte) (solo un servidor ha tenido 1M+
+        miembros: Discord Snowsgiving 2021)</li>
+      <li>50 integraciones por servidor</li>
+      <li>1k miembros por thread</li>
+      <li>10 embeds por mensaje</li>
+      <li>10 archivos adjuntos por mensaje</li>
+      <li>100 eventos de servidor sin terminar</li>
+      <li>20 reacciones por mensaje</li>
+      <li>50 mensajes anclados por canal</li>
+      <li>10 webhooks por canal</li>
+      <li>10 publicaciones en canales de anuncios por hora</li>
+      <li>50/100/150/250 emojis por servidor (sin boosts/tier 1/tier 2/tier 3)</li>
+      <li>50/100/150/250 emojis animados por servidor</li>
+      <li>5/15/30/60 stickers por servidor</li>
+      <li>8/8/50/100mb de archivos adjuntos por mensaje (los bots pueden verificar el nivel de boost antes de enviar un
+        archivo adjunto grande)</li>
+      <li>1k amigos por cuenta</li>
+      <li>10 usuarios por DM Grupal</li>
+      <li>100 (200 con nitro) servidores por cuenta</li>
+      <li>25 aplicaciones por cuenta</li>
+      <li>5 componentes por mensaje</li>
+      <li>5 botones o 1 select menu por action row</li>
+    </ul>
+    <p>Tanto los bots como los usuarios reciben info de todos los canales de un servidor</p>
+    <p>Los usernames no pueden tener @, #, :, ```, discord</p>
+    <p>Los usernames no pueden ser everyone o here</p>
+    <p>La única manera de saber si un miembro está en un canal de voz es a través del gateway</p>
+    <p>La única manera de conseguir el banner de un usuario es a través del rest api</p>
+    <p>No existe el evento TYPING_STOP, el calculo son 7 segundos o un mensaje enviado</p>
+
+
+    <h2>Mensajes</h2>
+    <p>Editar un mensaje y agregar una mención no envia notificación</p>
+    <p>Una mención no notifica si está dentro de un embed</p>
+    <p>Incluir propiedades en allowed_mentions te permite crear mensajes que no hacen ping</p>
+    <p>Puedes mencionar entidades solo con su id y nombre:</p>
+    <ul>
+      <li>
+        &#60;@ID> representa a un usuario (antes se usaba <@!ID> para que el cliente identifique los miembros con
+          apodos)
+      </li>
+      <li>
+        &#60;@&ID> representa a un rol
+      </li>
+      <li>
+        &#60;#ID> representa a un usuario
+      </li>
+      <li>
+        &#60;:NOMBRE:ID> y &#60;a:NOMBRE:ID> representan a un emoji y un emoji animado
+      </li>
+      <li>
+        &#60;/NOMBRE:ID> representa un comando de aplicación
+      </li>
+      <li>
+        &#60;t:TIMESTAMP> y &#60;t:TIMESTAMP:STYLE> te muestra una fecha y hora en concreto (se usa UNIX) (/1000)
+      </li>
+    </ul>
+    <p>No se puede usar markdown en `info needed` (embed)</p>
+    <p>Solo se pueden enviar embeds de tipo rich</p>
+    <p>Ya no se puede enviar un embed vacio</p>
+    <p>Un emoji en un mensaje puede mostrar hasta 5k reacciones (el contador regresa visualmente a 5k cuando reinicias
+      el app)</p>
+    <p>La vista previa de Twitter con más de una foto en realidad son multiples embeds, cada uno de los embeds tiene que
+      tener el mismo url</p>
+
+    <h2>Roles</h2>
+    <p>@everyone en realidad es un rol que todos los miembros de un servidor tienen</p>
+    <p>El rol @everyone comparte el id del servidor</p>
+    <p>El rol @everyone podria clasificar a los servidores en 2 grupos: aquellos con permisos para ver canales y
+      aquellos que no</p>
+    <p>No se puede crear un rol de color #000000</p>
+    <p>No puedes editar el rol más alto que tienes ni los roles que están por encima del mismo</p>
+
+    <h2>Guilds</h2>
+    <p>Los bans son por ip pero los bots no consiguen esa informacion</p>
+    <p>Los webhooks pueden usar emojis de otros servidores</p>
+    <p>Los webhooks pueden usar masked links en el contenido del mensaje</p>
+    <p>Un webhook no puede tener de nombre clyde</p>
+    <p>Los webhooks pueden tener nombres de hasta 80 caracteres</p>
+    <p>La propiedad preferred_locale es un guild es en-US por default</p>
+
+    <h2>Bots</h2>
+    <p>Limites:</p>
+    <ul>
+      <li>200 comandos de aplicación creados por día</li>
+      <li>100 comandos de aplicación de servidor</li>
+      <li>100 comandos de aplicación globales</li>
+      <li>25 subcomandos por comando de aplicación</li>
+      <li>25 grupos de subcomandos por comando de aplicación (teoricamente puedes tener hasta 62500 comandos)</li>
+      <li>4k letras en el objeto de creación de un comando de aplicación (como string)</li>
+      <li>100 permissions overwrites por comando</li>
+      <li>2.5k servidores por conexión</li>
+      <li>50 solicitudes HTTP por segundo</li>
+      <li>1 login por ip cada 5s (los bots grandes pueden pedir a soporte un número múltiplo de 16)</li>
+      <li>10k solicitudes HTTP incorrectas (401,403,429) por 10m</li>
+      <li>Fetchear de 100 en 100 las reacciones de un mensaje</li>
+    </ul>
+    <p>Los bots pueden:</p>
+    <ul>
+      <li>Ignorar el slowmode</li>
+      <li>Usar emojis de otros servers (si tienen permiso y si están en el servidor de ese emoji)</li>
+      <li>Crear servidores si están en menos de 10 servidores</li>
+      <li>Crear threads sin mensaje inicial</li>
+      <li>Poner una razón a varias acciones administrativas</li>
+    </ul>
+    <p>Los bots no pueden:</p>
+    <ul>
+      <li>Usar el buscador en un servidor</li>
+      <li>Configurar el vanity url</li>
+      <li>Conseguir el About me de un usuario</li>
+      <li>Inspeccionar las estadisticas de un servidor</li>
+      <li>Activar componentes ni comandos de aplicaciones</li>
+      <li>Transmitir video ni ver transmisiones</li>
+      <li>Bulk delete mensajes con más de 2 semanas de antiguedad</li>
+    </ul>
+    <p>Interacciones:</p>
+    <ul>
+      <li>Responder a una interacción no cuenta para los ratelimits (cualquier otra acción usa el endpoint de webhooks)
+      </li>
+      <li>No se puede responder a un modal con otro modal</li>
+      <li>Siempre tienes que responder a una interaccion con un mensaje o modal</li>
+      <li>No puedes tener subcommand group y subcommand en un mismo comando</li>
+    </ul>
+    <p>Flags disponibles al enviar un mensaje:</p>
+    <ul>
+      <li>1 << 2 para que no renderice embeds</li>
+      <li>1 << 6 para mensaje efímero (solo interacciones)</li>
+    </ul>
+  </div>
+</body>
+
+</html>
