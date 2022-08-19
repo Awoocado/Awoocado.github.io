@@ -26,6 +26,22 @@
       list-style-type: circle
     }
 
+    .role {
+      background-color: hsl(236, 83.3%, 92.9%);
+      color: hsl(235, 66.7%, 58.8%);
+    }
+
+    code {
+      font-size: 13px;
+      padding: 3px 5px 4px;
+      border-radius: 3px;
+      background-color: hsl(220, 13%, 95.5%);
+      color: hsl(210, 9.8%, 20%) !important;
+      font-family: Consolas,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Monaco,Courier New,Courier,monospace;
+      line-height: 13px;
+      color: #fff;
+    }
+
     @media (prefers-color-scheme: dark) {
       body {
         color: #eee;
@@ -34,6 +50,16 @@
 
       body a {
         color: #809fff;
+      }
+
+      .role {
+        background-color: hsla(235, 85.6%, 64.7%, 0.3);
+        color: hsl(236, 83.3%, 92.9%);
+      }
+
+      code {
+        background-color: hsl(225, 7.7%, 10.2%);
+        color: hsl(210, 2.9%, 86.7%) !important;
       }
     }
   </style>
@@ -47,19 +73,21 @@
 
     <p>Las IDs (snowflakes) son incrementales e incluyen la fecha de creación de la entidad a la que pertenece</p>
     <p>Las IDs más antiguas tienen 17 cifras y las más recientes tienen 19 cifras (las ids de 20 cifras ocurrirán a
-      partir del 2090-07-20 17:49:51.015)</p>
+      partir del <code>2090-07-20 17:49:51.015</code>)</p>
     <p>Un canal de DM tiene un id distinto al destinatario</p>
     <p>Clyde tiene el ID 1</p>
-    <p>Limites:</p>
+    <p>Límites:</p>
     <ul>
       <li>500 canales por servidor</li>
-      <li>50 canales en una categoria de un servidor</li>
+      <li>50 canales en una categoría de un servidor</li>
       <li>250 roles por servidor</li>
-      <li>500k miembros por servidor (se puede incrementar con ticket a soporte) (solo un servidor ha tenido 1M+
+      <li>500k miembros por servidor (se puede incrementar con un ticket al soporte) (sólo un servidor ha tenido 1M+
         miembros: Discord Snowsgiving 2021)</li>
       <li>50 integraciones por servidor</li>
       <li>1k miembros por thread</li>
       <li>10 embeds por mensaje</li>
+      <li>1k (2k con nitro) caracteres por mensaje</li>
+      <li>6k caracteres por la suma de todos los embeds del mensaje</li>
       <li>10 archivos adjuntos por mensaje</li>
       <li>100 eventos de servidor sin terminar</li>
       <li>20 reacciones por mensaje</li>
@@ -79,77 +107,85 @@
       <li>5 botones o 1 select menu por action row</li>
     </ul>
     <p>Tanto los bots como los usuarios reciben info de todos los canales de un servidor</p>
-    <p>Los usernames no pueden tener @, #, :, ```, discord</p>
+    <p>Los usernames no pueden tener <code>@</code>, <code>#</code>, <code>:</code>, <code>```</code>, <code>discord</code></p>
     <p>Los usernames no pueden ser everyone o here</p>
     <p>La única manera de saber si un miembro está en un canal de voz es a través del gateway</p>
-    <p>La única manera de conseguir el banner de un usuario es a través del rest api</p>
-    <p>No existe el evento TYPING_STOP, el calculo son 7 segundos o un mensaje enviado</p>
+    <p>La única manera de conseguir el banner de un usuario es a través del REST api</p>
+    <p>No existe el evento <code>TYPING_STOP</code>, el calculo son 7 segundos o un mensaje enviado</p>
 
     <h2>Mensajes</h2>
     <p>Editar un mensaje y agregar una mención no envia notificación</p>
     <p>Una mención no notifica si está dentro de un embed</p>
-    <p>Incluir propiedades en allowed_mentions te permite crear mensajes que no hacen ping</p>
+    <p>Incluir propiedades en <code>allowed_mentions</code> te permite crear mensajes que no hacen ping</p>
     <p>Puedes mencionar entidades solo con su id y nombre:</p>
     <ul>
       <li>
-        &#60;@ID> representa a un usuario (antes se usaba <@!ID> para que el cliente identifique los miembros con
+        <code>&#60;@ID></code> representa a un usuario (antes se usaba <@!ID> para que el cliente identifique los miembros con
           apodos)
       </li>
       <li>
-        &#60;@&ID> representa a un rol
+        <code>&#60;@&ID></code> representa a un rol
       </li>
       <li>
-        &#60;#ID> representa a un canal
+        <code>&#60;#ID></code> representa a un canal
       </li>
       <li>
-        &#60;:NOMBRE:ID> y &#60;a:NOMBRE:ID> representan a un emoji y un emoji animado
+        <code>&#60;:NOMBRE:ID></code> y <code>&#60;a:NOMBRE:ID></code> representan a un emoji y un emoji animado
       </li>
       <li>
-        &#60;/NOMBRE:ID> representa un comando de aplicación
+        <code>&#60;/NOMBRE:ID></code> representa un comando de aplicación
       </li>
       <li>
-        &#60;t:TIMESTAMP> y &#60;t:TIMESTAMP:STYLE> te muestra una fecha y hora en concreto (se usa UNIX) (/1000)
+        <code>&#60;t:TIMESTAMP></code> y <code>&#60;t:TIMESTAMP:STYLE></code> te muestra una fecha y hora en concreto (se usa UNIX) (ms/1000)
       </li>
     </ul>
-    <p>No se puede usar markdown en `info needed` (embed)</p>
-    <p>Solo se pueden enviar embeds de tipo rich</p>
-    <p>Ya no se puede enviar un embed vacio</p>
+    <p>No se puede usar markdown en los siguientes campos de un embed:</p>
+    <ul>
+      <li>
+        Nombre del autor (<code>author?.name</code>)
+      </li>
+      <li>
+        Texto del pie (<code>footer?.text</code>)
+      </li>
+    </ul>
+    <p>Solo se pueden enviar embeds de tipo <code>rich</code></p>
+    <p>Ya no se puede enviar un embed vacío</p>
     <p>Un emoji en un mensaje puede mostrar hasta 5k reacciones (el contador regresa visualmente a 5k cuando reinicias
       el app)</p>
     <p>La vista previa de Twitter con más de una foto en realidad son multiples embeds, cada uno de los embeds tiene que
       tener el mismo url</p>
 
     <h2>Roles</h2>
-    <p>@everyone en realidad es un rol que todos los miembros de un servidor tienen</p>
-    <p>El rol @everyone comparte el id del servidor</p>
-    <p>El rol @everyone podria clasificar a los servidores en 2 grupos: aquellos con permisos para ver canales y
+    <p><span class="role">@everyone</span> en realidad es un rol que todos los miembros de un servidor tienen</p>
+    <p>El rol <span class="role">@everyone</span> comparte el id del servidor</p>
+    <p>El rol <span class="role">@everyone</span> podria clasificar a los servidores en 2 grupos: aquellos con permisos para ver canales y
       aquellos que no</p>
     <p>No se puede crear un rol de color #000000</p>
     <p>No puedes editar el rol más alto que tienes ni los roles que están por encima del mismo</p>
 
     <h2>Guilds</h2>
-    <p>Los bans son por ip pero los bots no consiguen esa informacion</p>
+    <p>Los bans son por IP pero los bots no consiguen esa informacion</p>
     <p>Los webhooks pueden usar emojis de otros servidores</p>
     <p>Los webhooks pueden usar masked links en el contenido del mensaje</p>
-    <p>Un webhook no puede tener de nombre clyde</p>
+    <p>Un webhook no puede tener <code>clyde</code> de nombre</p>
     <p>Los webhooks pueden tener nombres de hasta 80 caracteres</p>
-    <p>La propiedad preferred_locale de un guild es en-US por default</p>
+    <p>La propiedad <code>preferred_locale</code> de un guild es <code>en-US</code> por default</p>
 
     <h2>Bots</h2>
-    <p>Limites:</p>
+    <p>Límites:</p>
     <ul>
       <li>200 comandos de aplicación creados por día</li>
       <li>100 comandos de aplicación de servidor</li>
       <li>100 comandos de aplicación globales</li>
       <li>25 subcomandos por comando de aplicación</li>
-      <li>25 grupos de subcomandos por comando de aplicación (teoricamente puedes tener hasta 62500 comandos globales y
+      <li>25 grupos de subcomandos por comando de aplicación (teóricamente puedes tener hasta 62500 comandos globales y
         62500 comandos por guild)</li>
       <li>4k letras en el objeto de creación de un comando de aplicación (como string)</li>
       <li>100 permissions overwrites por comando</li>
       <li>2.5k servidores por conexión</li>
       <li>50 solicitudes HTTP por segundo</li>
-      <li>1 login por ip cada 5s (los bots grandes pueden pedir a soporte un número múltiplo de 16)</li>
-      <li>10k solicitudes HTTP incorrectas (401,403,429) por 10m</li>
+      <li>1 login por IP cada 5s (los bots grandes pueden pedir a soporte un número múltiplo de 16)</li>
+      <li>10k solicitudes HTTP incorrectas (401, 403, 429) por 10m</li>
       <li>Fetchear de 100 en 100 las reacciones de un mensaje</li>
     </ul>
     <p>Los bots pueden:</p>
@@ -168,7 +204,8 @@
       <li>Inspeccionar las estadisticas de un servidor</li>
       <li>Activar componentes ni comandos de aplicaciones</li>
       <li>Transmitir video ni ver transmisiones</li>
-      <li>Bulk delete mensajes con más de 2 semanas de antiguedad</li>
+      <li>Usar stickers que no estén en el servidor del mensaje</li>
+      <li>Eliminar mensajes en masa con más de 2 semanas de antiguedad</li>
     </ul>
     <p>Interacciones:</p>
     <ul>
@@ -180,10 +217,9 @@
     </ul>
     <p>Flags disponibles al enviar un mensaje:</p>
     <ul>
-      <li>1 << 2 para que no renderice embeds</li>
-      <li>1 << 6 para mensaje efímero (solo interacciones)</li>
+      <li><code>1 << 2 (SUPRESS_EMBEDS)</code> para que no renderice embeds</li>
+      <li><code>1 << 6 (EPHEMERAL)</code> para mensaje efímero (solo interacciones)</li>
     </ul>
   </div>
 </body>
-
 </html>
